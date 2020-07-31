@@ -1,0 +1,62 @@
+~ > output
+~ < input
+~ # chapter/scene/level
+~ ! command
+~ ? flag
+~ ~ comment
+
+> What's your name?
+< name;string
+
+> What's your age?
+< age;number
+
+> Select your class (1, 2, or 3):
+>	1. Warrior
+>	2. Mage
+>	3. Archer
+< class;number;options=1,2,3
+
+# Chapter 1
+
+> You awake on a beach, naked and alone.
+> Next to you lies a seemingly recent corpse.
+> You notice a satchel under the corpse. It could contain something valuable given your desperate situation.
+
+> Select an option (1, 2, 3, or 4):
+>	1. Search the corpse
+>	2. Poke the corpse
+>	3. Attack the corpse
+>	4. Stay away from the corpse
+< 1.corpse;number;options=1,2,3,4
+
+!switch 1.corpse
+!begin
+!case 1
+> You reach down to search for the corpse for anything valuable.
+> At your touch the corpse suddenly awakes and bites your hand!
+> You quickly free yourself and pull the frail corpse's head off of its body.
+!effect poison target=self
+> You killed the corpse.
+?1.corpse.killed=true
+
+!case 2
+> You find a stick nearby and cautiously poke the corpse.
+> After a couple of pokes the corpse suddenly awakes.
+> You stab the stick into the corpse's brain.
+> You killed the corpse.
+?1.corpse.killed=true
+
+!case 3
+> You find a stick nearby and violently attack the corpse with all of your remaining energy.
+> You killed the corpse.
+?1.corpse.killed=true
+
+!case 4
+> You cautiously step away from the corpse, leaving behind the loot.
+?1.corpse.killed=false
+!end
+
+~ player gets exp regardless of choice
+!give experience target=self amount=10
+

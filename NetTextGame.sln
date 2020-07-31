@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetTextGame", "NetTextGame\NetTextGame.csproj", "{6618EEA9-24CB-4314-9E68-5F79EDD4EC5D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetTextGame.Sample", "NetTextGame.Sample\NetTextGame.Sample.csproj", "{4109E619-DFD8-4E77-812F-BD80A3E41853}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{3D504AFB-2D64-4213-AF59-A0CBD5709512}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6618EEA9-24CB-4314-9E68-5F79EDD4EC5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6618EEA9-24CB-4314-9E68-5F79EDD4EC5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6618EEA9-24CB-4314-9E68-5F79EDD4EC5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6618EEA9-24CB-4314-9E68-5F79EDD4EC5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4109E619-DFD8-4E77-812F-BD80A3E41853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4109E619-DFD8-4E77-812F-BD80A3E41853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4109E619-DFD8-4E77-812F-BD80A3E41853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4109E619-DFD8-4E77-812F-BD80A3E41853}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9056E28-0451-4366-84CF-87F5E6B6783E}
+	EndGlobalSection
+EndGlobal

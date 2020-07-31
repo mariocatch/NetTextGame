@@ -1,0 +1,22 @@
+{
+  "variables": [
+    {
+      "name": "Name",
+      "type": "string"
+    },
+    {
+      "name": "Age",
+      "type": "number"
+    }
+  ],
+  "questions": [
+    {
+      "text": "What's your name?",
+      "answer": "${Name}"
+    },
+    {
+      "text": "How old are you?",
+      "answer": "${Age}"
+    }
+  ]
+}
