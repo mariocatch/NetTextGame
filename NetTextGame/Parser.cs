@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace NetTextGame
 {
@@ -24,33 +26,22 @@ namespace NetTextGame
         {
             var steps = new List<Step>();
 
-            foreach (var line in File.ReadLines(_path))
+            foreach (var line in File.ReadLines(_path).Select(s => s.Trim()))
             {
                 if (string.IsNullOrWhiteSpace(line))
                     continue;
 
-                var step = new Step { Text = line.Substring(1) };
-
-                for (int i = 0; i < line.Length; i++)
+                var step = new Step { Text = line.Substring(1).Trim() };
+                step.StepType = line[0] switch
                 {
-                    var c = line[i];
-
-                    if (c == '~')
-                    {
-                        step.StepType = StepType.Comment;
-                        break;
-                    }
-                    else if (c == '>')
-                        step.StepType = StepType.Output;
-                    else if (c == '<')
-                        step.StepType = StepType.Input;
-                    else if (c == '#')
-                        step.StepType = StepType.Chapter;
-                    else if (c == '!')
-                        step.StepType = StepType.Command;
-                    else if (c == '?')
-                        step.StepType = StepType.Flag;
-                }
+                    '~' => StepType.Comment,
+                    '>' => StepType.Output,
+                    '<' => StepType.Input,
+                    '#' => StepType.Chapter,
+                    '!' => StepType.Command,
+                    '?' => StepType.Flag,
+                    _ => throw new InvalidOperationException($"Unsupported line prefix of {line[0]} was used")
+                };
 
                 steps.Add(step);
             }

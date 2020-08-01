@@ -15,7 +15,7 @@
 >	1. Warrior
 >	2. Mage
 >	3. Archer
-< class;number;options=1,2,3
+< class;number;1,2,3
 
 # Chapter 1
 
@@ -28,7 +28,7 @@
 >	2. Poke the corpse
 >	3. Attack the corpse
 >	4. Stay away from the corpse
-< 1.corpse;number;options=1,2,3,4
+< 1.corpse;number;1,2,3,4
 
 !switch 1.corpse
 !begin
