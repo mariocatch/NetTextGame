@@ -31,12 +31,11 @@
 < 1.corpse;number;1,2,3,4
 
 !switch 1.corpse
-!begin
 !case 1
 > You reach down to search for the corpse for anything valuable.
 > At your touch the corpse suddenly awakes and bites your hand!
 > You quickly free yourself and pull the frail corpse's head off of its body.
-!effect poison target=self
+!effect poison
 > You killed the corpse.
 ?1.corpse.killed=true
 
@@ -55,7 +54,7 @@
 !case 4
 > You cautiously step away from the corpse, leaving behind the loot.
 ?1.corpse.killed=false
-!end
+!endswitch 
 
 ~ player gets exp regardless of choice
 !give experience target=self amount=10
