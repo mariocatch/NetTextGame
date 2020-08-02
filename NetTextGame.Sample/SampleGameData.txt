@@ -57,4 +57,4 @@
 !endswitch 
 
 ~ player gets exp regardless of choice
-!give experience target=self amount=10
+!give experience 10

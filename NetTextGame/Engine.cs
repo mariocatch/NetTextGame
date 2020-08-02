@@ -150,15 +150,11 @@ namespace NetTextGame
                                 var giveName = splitStepText[1];
                                 if (giveName == "experience")
                                 {
-                                    var target = splitStepText[2];
-                                    var amount = int.Parse(splitStepText[3]);
-                                    if (target == "SELF")
-                                    {
-                                        _experience += amount;
-                                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                                        Console.WriteLine($"You gain {amount} experience");
-                                        Console.ResetColor();
-                                    }
+                                    var amount = int.Parse(splitStepText[2]);
+                                    _experience += amount;
+                                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                                    Console.WriteLine($"You gain {amount} experience");
+                                    Console.ResetColor();
                                 }
                                 break;
                         }
