@@ -11,13 +11,9 @@
 
   <ItemGroup>
     <Resource Include="Program.cs" />
-    <Resource Include="SampleGameData.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SampleGameData.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="SampleGameData.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

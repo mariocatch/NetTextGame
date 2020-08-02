@@ -15,6 +15,7 @@ namespace NetTextGame
         private readonly Dictionary<string, bool> _flags = new Dictionary<string, bool>();
         private readonly Dictionary<string, Input> _inputs = new Dictionary<string, Input>();
         private readonly List<string> _activeEffects = new List<string>();
+        private int _experience;
         private ParseMode _parseMode = ParseMode.LineByLine;
         private bool _onCorrectCase;
         private string _activeSwitch;
@@ -123,7 +124,7 @@ namespace NetTextGame
                     case StepType.Command:
                         splitStepText = step.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                         var commandName = splitStepText[0];
-                        string commandParameter = null;
+                        string commandParameter;
                         switch (commandName.ToUpper())
                         {
                             case "SWITCH":
@@ -140,13 +141,24 @@ namespace NetTextGame
                                 break;
                             case "EFFECT":
                                 var effectName = splitStepText[1];
-                                var effectTarget = splitStepText[2];
-                                if (effectTarget == "self")
+                                _activeEffects.Add(effectName);
+                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                                Console.WriteLine($"You gain effect: {effectName}");
+                                Console.ResetColor();
+                                break;
+                            case "GIVE":
+                                var giveName = splitStepText[1];
+                                if (giveName == "experience")
                                 {
-                                    _activeEffects.Add(effectName);
-                                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                                    Console.WriteLine($"You gain effect: {effectName}");
-                                    Console.ResetColor();
+                                    var target = splitStepText[2];
+                                    var amount = int.Parse(splitStepText[3]);
+                                    if (target == "SELF")
+                                    {
+                                        _experience += amount;
+                                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                                        Console.WriteLine($"You gain {amount} experience");
+                                        Console.ResetColor();
+                                    }
                                 }
                                 break;
                         }
