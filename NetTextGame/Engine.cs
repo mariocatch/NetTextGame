@@ -7,7 +7,8 @@ namespace NetTextGame
     internal enum ParseMode
     {
         LineByLine,
-        Switch
+        Switch,
+        SkipToEndIf
     }
 
     public class Engine
@@ -30,6 +31,11 @@ namespace NetTextGame
 
             foreach (var step in _steps)
             {
+                if (_parseMode == ParseMode.SkipToEndIf)
+                {
+                    if (step.StepType != StepType.Command || step.Text.ToUpper() != "ENDIF") continue;
+                }
+
                 string[] splitStepText = null;
                 switch (step.StepType)
                 {
@@ -140,6 +146,11 @@ namespace NetTextGame
                                 _onCorrectCase = commandParameter == _inputs[_activeSwitch].Value;
                                 break;
                             case "EFFECT":
+                                if (_parseMode != ParseMode.LineByLine &&
+                                    (_parseMode != ParseMode.Switch || !_onCorrectCase))
+                                {
+                                    continue;
+                                }
                                 var effectName = splitStepText[1];
                                 _activeEffects.Add(effectName);
                                 Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -156,6 +167,24 @@ namespace NetTextGame
                                     Console.WriteLine($"You gain {amount} experience");
                                     Console.ResetColor();
                                 }
+                                break;
+                            case "IF":
+                                commandParameter = splitStepText[1];
+                                var splitCommandParameter = commandParameter.Split("==", StringSplitOptions.RemoveEmptyEntries);
+                                // get flag and bool
+                                // check flags for flag
+                                // if doesnt exist skip to endif
+                                // if exists check value
+                                // if value doesnt match skip to endif
+                                var ifFlag = splitCommandParameter[0];
+                                var ifValue = bool.Parse(splitCommandParameter[1]);
+                                if (!_flags.ContainsKey(ifFlag) || _flags[ifFlag] != ifValue)
+                                {
+                                    _parseMode = ParseMode.SkipToEndIf;
+                                }
+                                break;
+                            case "endif":
+                                _parseMode = ParseMode.LineByLine;
                                 break;
                         }
                         break;
