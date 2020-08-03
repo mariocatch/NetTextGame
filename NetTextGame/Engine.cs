@@ -33,13 +33,13 @@ namespace NetTextGame
             {
                 if (_parseMode == ParseMode.SkipToEndIf)
                 {
-                    if (step.StepType != StepType.Command || step.Text.ToUpper() != "ENDIF") continue;
+                    if (!(step is CommandStep) || step.Text.ToUpper() != "ENDIF") continue;
                 }
 
                 string[] splitStepText = null;
-                switch (step.StepType)
+                switch (step)
                 {
-                    case StepType.Output:
+                    case OutputStep:
                         if (_parseMode != ParseMode.LineByLine &&
                             (_parseMode != ParseMode.Switch || !_onCorrectCase))
                         {
@@ -50,7 +50,7 @@ namespace NetTextGame
                         Console.WriteLine(step.Text);
                         Console.ResetColor();
                         break;
-                    case StepType.Input:
+                    case InputStep:
                         if (_parseMode != ParseMode.LineByLine &&
                             (_parseMode != ParseMode.Switch || !_onCorrectCase))
                         {
@@ -105,7 +105,7 @@ namespace NetTextGame
                             Value = rawInput
                         });
                         break;
-                    case StepType.Chapter:
+                    case ChapterStep:
                         if (_parseMode != ParseMode.LineByLine &&
                             (_parseMode != ParseMode.Switch || !_onCorrectCase))
                         {
@@ -116,7 +116,7 @@ namespace NetTextGame
                         Console.WriteLine($"{Environment.NewLine}__ {step.Text} __{Environment.NewLine}");
                         Console.ResetColor();
                         break;
-                    case StepType.Flag:
+                    case FlagStep:
                         if (_parseMode != ParseMode.LineByLine &&
                             (_parseMode != ParseMode.Switch || !_onCorrectCase))
                         {
@@ -127,7 +127,7 @@ namespace NetTextGame
                         if (bool.TryParse(splitStepText[1], out var value)) _flags.Add(flagName, value);
                         else throw new InvalidOperationException($"Invalid flag value of {splitStepText[1]} was used");
                         break;
-                    case StepType.Command:
+                    case CommandStep:
                         splitStepText = step.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                         var commandName = splitStepText[0];
                         string commandParameter;

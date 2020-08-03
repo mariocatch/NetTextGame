@@ -5,16 +5,6 @@ using System.Linq;
 
 namespace NetTextGame
 {
-    internal enum StepType
-    {
-        Unknown,
-        Comment,
-        Output,
-        Input,
-        Chapter,
-        Command,
-        Flag
-    }
 
     internal class Parser
     {
@@ -31,15 +21,17 @@ namespace NetTextGame
                 if (string.IsNullOrWhiteSpace(line))
                     continue;
 
-                var step = new Step { Text = line.Substring(1).Trim() };
-                step.StepType = line[0] switch
+                var text = line.Substring(1).Trim();
+#pragma warning disable IDE0007 // Use implicit type
+                Step step = line[0] switch
+#pragma warning restore IDE0007 // Use implicit type
                 {
-                    '~' => StepType.Comment,
-                    '>' => StepType.Output,
-                    '<' => StepType.Input,
-                    '#' => StepType.Chapter,
-                    '!' => StepType.Command,
-                    '?' => StepType.Flag,
+                    '~' => new CommentStep(text),
+                    '>' => new OutputStep(text),
+                    '<' => new InputStep(text),
+                    '#' => new ChapterStep(text),
+                    '!' => new CommandStep(text),
+                    '?' => new FlagStep(text),
                     _ => throw new InvalidOperationException($"Unsupported line prefix of {line[0]} was used")
                 };
 
